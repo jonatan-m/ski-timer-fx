@@ -15,7 +15,7 @@ public class App extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Hello World!!");
         Button btn = new Button();
         btn.setText("Say 'Tjena världen'");
         btn.setOnAction(new EventHandler<ActionEvent>() {

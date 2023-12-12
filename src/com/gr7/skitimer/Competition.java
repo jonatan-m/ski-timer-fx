@@ -1,5 +1,7 @@
 package com.gr7.skitimer;
 
-class Competition {
+import java.util.ArrayList;
 
+class Competition {
+	private ArrayList<Competitor> competitors = new ArrayList<>();
 }

@@ -3,6 +3,7 @@ package com.gr7.skitimer;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.TreeMap;
 
 enum StartFormat {
 	MASS_START,
@@ -14,13 +15,29 @@ class Competition {
 	private ArrayList<Competitor> competitors = new ArrayList<>();
 	private StartFormat startFormat;
 	private int interval = 30;
+	boolean isFinished = false;
+	CompetitionResult previous = null;
 	
 	public Competition(StartFormat startFormat) {
 		this.startFormat = startFormat;
 	}
 	
+	public Competition(StartFormat startFormat, String competitionSaveFile) {
+		this.startFormat = startFormat;
+		
+		//TODO: Read file, create CompetitionResult object from data
+	}
+	
 	public void addCompetitor(String name, String number) {
 		competitors.add(new Competitor(name, number));
+	}
+	
+	public void addCompetitor(ArrayList<Competitor> competitors) {
+		this.competitors.addAll(competitors);
+	}
+	
+	public ArrayList<Competitor> getCompetitors(){
+		return competitors;
 	}
 	
 	public Result setStartTimes(LocalTime competitionStartTime) {
@@ -32,7 +49,7 @@ class Competition {
 		case PURSUIT:
 			return setPursuitStartTimes(competitionStartTime);
 		}
-		return Result.error(new IllegalStateException("Competition object has an invalid start format"));
+		return Result.error(new IllegalStateException("Competition state invalid: no start format"));
 	}
 	
 	private Result setMassStartTimes(LocalTime startTime) {
@@ -56,6 +73,15 @@ class Competition {
 	}
 	
 	private Result setPursuitStartTimes(LocalTime startTime) {
+		if(previous == null) {
+			return Result.error(
+					new IllegalStateException(
+							"Competition state invalid: pursuit format requires a previous result"));			
+		}
+		
+		TreeMap<LocalTime, Competitor> prevResult = previous.getResults();
+		
+		
 		return Result.success();
 	}
 	

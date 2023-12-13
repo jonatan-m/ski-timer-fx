@@ -8,10 +8,10 @@ class Competitor {
 		private String skierNumber;
 		private LocalTime startTime;
 		
-		public Competitor (String skierName, String skierNumber, LocalTime startTime) {
+		public Competitor (String skierName, String skierNumber) {
 			this.skierName = skierName;
 			this.skierNumber= skierNumber;
-			this.startTime = startTime;
+
 		}
 		public String getSkierName() {
 			return skierName;
@@ -24,6 +24,9 @@ class Competitor {
 		public LocalTime getStartTime() {
 			return startTime;
 			
+		}
+		public void setStartTime(LocalTime startTime) {
+            this.startTime = startTime;
 		
 	}
 }

@@ -4,4 +4,7 @@ import java.util.ArrayList;
 
 class Competition {
 	private ArrayList<Competitor> competitors = new ArrayList<>();
+	
+	
+	
 }

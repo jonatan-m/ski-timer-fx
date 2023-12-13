@@ -19,8 +19,8 @@ class Competition {
 		this.startFormat = startFormat;
 	}
 	
-	public void addCompetitor(String name, String number, LocalTime startTime) {
-		competitors.add(new Competitor(name, number, startTime));
+	public void addCompetitor(String name, String number) {
+		competitors.add(new Competitor(name, number));
 	}
 	
 	public Result setStartTimes(LocalTime competitionStartTime) {

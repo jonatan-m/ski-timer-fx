@@ -1,8 +1,8 @@
 package com.gr7.skitimer;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.time.temporal.ChronoUnit;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 enum StartFormat {
@@ -12,7 +12,7 @@ enum StartFormat {
 }
 
 class Competition {
-	private ArrayList<Competitor> competitors = new ArrayList<>();
+	private TreeMap<String, Competitor> competitors = new TreeMap<>();
 	private StartFormat startFormat;
 	private int interval = 30;
 	boolean isFinished = false;
@@ -29,14 +29,11 @@ class Competition {
 	}
 	
 	public void addCompetitor(String name, String number) {
-		competitors.add(new Competitor(name, number));
+		competitors.put(number, new Competitor(name, number));
 	}
 	
-	public void addCompetitor(ArrayList<Competitor> competitors) {
-		this.competitors.addAll(competitors);
-	}
 	
-	public ArrayList<Competitor> getCompetitors(){
+	public TreeMap<String, Competitor> getCompetitors(){
 		return competitors;
 	}
 	
@@ -53,20 +50,17 @@ class Competition {
 	}
 	
 	private Result setMassStartTimes(LocalTime startTime) {
-		for(var competitor : competitors) {
-			competitor.setStartTime(startTime);
-		}
+		competitors.forEach((key, value) -> value.setStartTime(startTime));
 		
 		return Result.success();
 	}
 	
 	private Result setIntervalStartTimes(LocalTime startTime) {
 		LocalTime intervalTime = startTime.minusSeconds(interval);
-		competitors.sort(Comparator.comparingInt(c -> Integer.parseInt(c.getSkierNumber())));
 		
-		for(var competitor : competitors) {
+		for(var entry : competitors.entrySet()) {
 			intervalTime = intervalTime.plusSeconds(interval);
-			competitor.setStartTime(intervalTime);
+			entry.getValue().setStartTime(intervalTime);
 		}
 		
 		return Result.success();
@@ -80,6 +74,26 @@ class Competition {
 		}
 		
 		TreeMap<LocalTime, Competitor> prevResult = previous.getResults();
+		
+		Entry<LocalTime, Competitor> fasterEntry = prevResult.firstEntry();
+		
+		competitors.get(fasterEntry.getValue().getSkierNumber())
+			.setStartTime(startTime);
+		
+		
+		while(prevResult.higherKey(fasterEntry.getKey()) != null) {
+			Entry<LocalTime, Competitor> slowerEntry = prevResult.higherEntry(fasterEntry.getKey());
+			LocalTime time1 = fasterEntry.getKey();
+			LocalTime time2 = slowerEntry.getKey();
+			
+			long diff = time1.until(time2, ChronoUnit.SECONDS);
+			
+			competitors.get(slowerEntry.getValue().getSkierNumber())
+				.setStartTime(startTime.plusSeconds(diff));
+			
+			
+			fasterEntry = slowerEntry;
+		}
 		
 		
 		return Result.success();

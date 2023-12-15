@@ -11,6 +11,12 @@ class PursuitStart extends Competition {
 	
 	public PursuitStart(String saveFilePath) {
 		super();
+		//TODO read file, create CompetitionResult
+	}
+	
+	public PursuitStart(CompetitionResult result) {
+		super();
+		previous = result;
 	}
 
 	@Override
@@ -22,21 +28,22 @@ class PursuitStart extends Competition {
 		}
 		
 		TreeMap<LocalTime, Competitor> prevResult = previous.getResults();
-		
+
 		Entry<LocalTime, Competitor> fasterEntry = prevResult.firstEntry();
 		
 		competitors.get(fasterEntry.getValue().getSkierNumber())
 			.setStartTime(startTime);
-		
+
 		while(prevResult.higherKey(fasterEntry.getKey()) != null) {
 			Entry<LocalTime, Competitor> slowerEntry = prevResult.higherEntry(fasterEntry.getKey());
 			LocalTime time1 = fasterEntry.getKey();
 			LocalTime time2 = slowerEntry.getKey();
 			
-			long diff = time1.until(time2, ChronoUnit.SECONDS);
-			
+			long diff = time1.until(time2, ChronoUnit.NANOS);
+
+			slowerEntry.getValue().setStartTime(fasterEntry.getValue().getStartTime().plusNanos(diff));
 			competitors.get(slowerEntry.getValue().getSkierNumber())
-				.setStartTime(startTime.plusSeconds(diff));
+				.setStartTime(slowerEntry.getValue().getStartTime());
 			
 			fasterEntry = slowerEntry;
 		}

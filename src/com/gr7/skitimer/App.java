@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
  
 public class App extends Application {
-	static Competition comp = new IntervalStart(Interval.THIRTY);
+	static Competition comp = new MassStart();
 	
     public static void main(String[] args) {
     	comp.addCompetitor("Shakur", "04");
@@ -31,7 +31,7 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Hello World!!");
         Button btn = new Button();
-        btn.setText("Ta tid åkare 01");
+        btn.setText("Målgång");
         btn.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -44,8 +44,25 @@ public class App extends Application {
             		nanos += dayInNanos;
             	}
             	
-            	var time = LocalTime.ofNanoOfDay(nanos);
-                System.out.println(time.format(DateTimeFormatter.ISO_LOCAL_TIME));
+            	comp.finishCompetitor("01", LocalTime.now());
+            	comp.finishCompetitor("02", LocalTime.now().plusSeconds(1).plusNanos(680000000));
+            	comp.finishCompetitor("03", LocalTime.now().plusSeconds(3).plusNanos(580000000));
+            	comp.finishCompetitor("04", LocalTime.now().plusSeconds(3).plusNanos(710000000));
+            	
+            	var result = comp.getResult();
+            	
+            	if(result != null) {
+            		Competition p = new PursuitStart(result);
+            		
+            		p.addCompetitor("Shakur", "04");
+                	p.addCompetitor("Fredde", "02");
+                	p.addCompetitor("Jonte", "01");
+                	p.addCompetitor("Lars", "03");
+                	
+                	p.setStartTimes(LocalTime.of(10, 0, 0));
+                	
+                	p.getCompetitors().forEach((k,v) -> System.out.println(v.getStartTime()));
+            	}
             }
         });
         

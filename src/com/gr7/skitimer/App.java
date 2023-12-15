@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
  
 public class App extends Application {
-	static Competition comp = new Competition(StartFormat.INTERVAL);
+	static Competition comp = new IntervalStart(Interval.THIRTY);
 	
     public static void main(String[] args) {
     	comp.addCompetitor("Shakur", "04");
@@ -36,10 +36,15 @@ public class App extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	Competitor gunde = comp.getCompetitors().get("01");
-            	long seconds = gunde.getStartTime().until(LocalTime.now(), ChronoUnit.SECONDS);
+            	Competitor gunde = comp.getCompetitors().get("04");
+            	long nanos = gunde.getStartTime().until(LocalTime.now(), ChronoUnit.NANOS);
             	
-            	var time = LocalTime.ofSecondOfDay(seconds);
+            	if(nanos < 0) {
+            		long dayInNanos = (long)24 * 60 * 60 * 1000000000;
+            		nanos += dayInNanos;
+            	}
+            	
+            	var time = LocalTime.ofNanoOfDay(nanos);
                 System.out.println(time.format(DateTimeFormatter.ISO_LOCAL_TIME));
             }
         });

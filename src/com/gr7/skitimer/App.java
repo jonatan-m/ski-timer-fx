@@ -1,6 +1,7 @@
 package com.gr7.skitimer;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import javafx.application.Application;
@@ -39,7 +40,7 @@ public class App extends Application {
             	long seconds = gunde.getStartTime().until(LocalTime.now(), ChronoUnit.SECONDS);
             	
             	var time = LocalTime.ofSecondOfDay(seconds);
-                System.out.println(time.toString().formatted("hh:mm:ss"));
+                System.out.println(time.format(DateTimeFormatter.ISO_LOCAL_TIME));
             }
         });
         

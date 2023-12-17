@@ -41,7 +41,9 @@ class PursuitStart extends Competition {
 			
 			long diff = time1.until(time2, ChronoUnit.NANOS);
 
-			slowerEntry.getValue().setStartTime(fasterEntry.getValue().getStartTime().plusNanos(diff));
+			slowerEntry.getValue()
+				.setStartTime(fasterEntry.getValue().getStartTime().plusNanos(diff));
+			
 			competitors.get(slowerEntry.getValue().getSkierNumber())
 				.setStartTime(slowerEntry.getValue().getStartTime());
 			

@@ -7,20 +7,29 @@ import java.util.List;
 class Timer {
 	private Instant start;
 	
+	Timer(){
+		
+	};
+	
+	
 	//Tar en Start tid
 	private void startTimer() {
 		start = Instant.now();
         System.out.println("Timer Startar");
 		
 	}
-	private void stopTimer() {
+	public void stopTimer() {
 		Instant stop = Instant.now();
         Duration timeElapsed = Duration.between(start, stop);
-        System.out.println("Tid som har gått: " + timeElapsed.toMillis() + " ms");
+        
+        long hours = timeElapsed.toHours();
+        long minutes = timeElapsed.minusHours(hours).toMinutes();
+        long seconds = timeElapsed.minusHours(hours).minusMinutes(minutes).toSeconds();
+        long millis = timeElapsed.minusHours(hours).minusMinutes(minutes).minusSeconds(seconds).toMillis();
 		
 	}
 	
-	private void huntingStart15sec(List<String> comp) {
+	public void huntingStart15sec(List<String> comp) {
 		for(String compet: comp) {
 			try {
 				Thread.sleep(15000);

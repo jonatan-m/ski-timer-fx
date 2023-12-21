@@ -47,12 +47,12 @@ public class App extends Application {
             		nanos += dayInNanos;
             	}
             	
-            	comp.finishCompetitor("01", LocalTime.now());
-            	comp.finishCompetitor("02", LocalTime.now().plusSeconds(1).plusNanos(680000000));
-            	comp.finishCompetitor("03", LocalTime.now().plusSeconds(3).plusNanos(580000000));
-            	comp.finishCompetitor("04", LocalTime.now().plusSeconds(3).plusNanos(710000000));
+            	comp.finishCompetitor("01", Timer.getTime());
+            	comp.finishCompetitor("02", Timer.getTime().plusSeconds(1).plusNanos(680000000));
+            	comp.finishCompetitor("03", Timer.getTime().plusSeconds(3).plusNanos(580000000));
+            	comp.finishCompetitor("04", Timer.getTime().plusSeconds(3).plusNanos(710000000));
             	
-            	var result = comp.getResult();
+            	
             	CompetitionResult r2 = new CompetitionResult();
             	comp.endCompetition();
             	
@@ -64,20 +64,20 @@ public class App extends Application {
         			System.err.println(e.getMessage()+ e.getStackTrace());
         		}
             	
-            	if(result != null) {
-            		Competition p = new PursuitStart("testresult.xml");
-            		
-            		p.addCompetitor("Shakur", "04");
-                	p.addCompetitor("Fredde", "02");
-                	p.addCompetitor("Jonte", "01");
-                	p.addCompetitor("Lars", "03");
-                	
-                	p.setStartTimes(LocalTime.of(10, 0, 0));
-                	
-                	p.getCompetitors().forEach((k,v) -> System.out.println(v.getStartTime()));
-            	}
             	
-            	CompetitorForm form = new CompetitorForm();
+        		Competition p = new PursuitStart("MASS_START20231220");
+        		
+        		p.addCompetitor("Shakur", "04");
+            	p.addCompetitor("Fredde", "02");
+            	p.addCompetitor("Jonte", "01");
+            	p.addCompetitor("Lars", "03");
+            	
+            	p.setStartTimes(LocalTime.of(10, 0, 0));
+            	
+            	p.getCompetitors().forEach((k,v) -> System.out.println(v.getStartTime()));
+            	
+            	
+            	CompetitorForm form = new CompetitorForm(p);
             	sceneStack.push(primaryStage.getScene());
             	primaryStage.setScene(form.getScene());
             }
@@ -85,7 +85,7 @@ public class App extends Application {
         
         StackPane root = new StackPane();
         root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 800, 800));
+        primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
     }
 }

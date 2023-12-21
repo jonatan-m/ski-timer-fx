@@ -18,7 +18,7 @@ class Timer {
         return results;      
 	}
 
-	public LocalTime getTime() {
+	public static LocalTime getTime() {
 		return LocalTime.now();
 	}
 	

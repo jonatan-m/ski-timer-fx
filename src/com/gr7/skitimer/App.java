@@ -1,9 +1,11 @@
 package com.gr7.skitimer;
 
+import java.io.File;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Stack;
 
+import jakarta.xml.bind.JAXBContext;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +31,7 @@ public class App extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+    	Stack<Scene> sceneStack = new Stack<>();
         primaryStage.setTitle("Hello World!!");
         Button btn = new Button();
         btn.setText("Målgång");
@@ -50,9 +53,19 @@ public class App extends Application {
             	comp.finishCompetitor("04", LocalTime.now().plusSeconds(3).plusNanos(710000000));
             	
             	var result = comp.getResult();
+            	CompetitionResult r2 = new CompetitionResult();
+            	comp.endCompetition();
+            	
+            	File file = new File("./results/testresult.xml");
+        		try {
+        			JAXBContext context = JAXBContext.newInstance(CompetitionResult.class, Competitor.class);
+        			r2 = (CompetitionResult) context.createUnmarshaller().unmarshal(file);
+        		}catch(Exception e) {
+        			System.err.println(e.getMessage()+ e.getStackTrace());
+        		}
             	
             	if(result != null) {
-            		Competition p = new PursuitStart(result);
+            		Competition p = new PursuitStart("testresult.xml");
             		
             		p.addCompetitor("Shakur", "04");
                 	p.addCompetitor("Fredde", "02");
@@ -63,12 +76,16 @@ public class App extends Application {
                 	
                 	p.getCompetitors().forEach((k,v) -> System.out.println(v.getStartTime()));
             	}
+            	
+            	CompetitorForm form = new CompetitorForm();
+            	sceneStack.push(primaryStage.getScene());
+            	primaryStage.setScene(form.getScene());
             }
         });
         
         StackPane root = new StackPane();
         root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.show();
     }
 }

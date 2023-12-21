@@ -1,5 +1,6 @@
 package com.gr7.skitimer;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 enum Interval {
@@ -19,6 +20,8 @@ class IntervalStart extends Competition {
 		else {
 			this.interval = 15;
 		}
+		this.date = LocalDate.now();
+		this.type = "INDIVIDUELL_START";
 	}
 	
 

@@ -1,13 +1,25 @@
 package com.gr7.skitimer;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.TreeMap;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+
+import java.io.File;
+import java.io.FileOutputStream;
+
 
 
 abstract class Competition {
 	protected TreeMap<String, Competitor> competitors = new TreeMap<>();
 	protected boolean isFinished = false;
 	protected CompetitionResult result = new CompetitionResult();
+	protected String type;
+	protected LocalDate date;
+	
 	
 	public abstract Result setStartTimes(LocalTime startTime);
 	
@@ -35,6 +47,12 @@ abstract class Competition {
 		if(!isFinished) return null;
 		
 		return result;
+	}
+	
+	public boolean endCompetition() {
+		if(!isFinished) return false;
+		
+		return FileManager.saveResult(result, type.concat(date.format(DateTimeFormatter.BASIC_ISO_DATE)));
 	}
 	
 }

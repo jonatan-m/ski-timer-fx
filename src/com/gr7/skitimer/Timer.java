@@ -13,7 +13,7 @@ class Timer {
 	
 	public static LocalTime stopTimer(LocalTime startTime) {
 		LocalTime time = LocalTime.now();
-        long diff = time.until(startTime, ChronoUnit.NANOS);
+        long diff = startTime.until(time, ChronoUnit.NANOS);
         
         if(diff <0) {
         	 long dayInNanos = (long)24 * 60 * 60 * 1000000000;

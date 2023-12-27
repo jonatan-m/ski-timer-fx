@@ -26,23 +26,18 @@ public class AddCompetitorScene extends SceneWrapper {
 
         competitorListView = new ListView<>();
 
-        // Textfälten för användarens input
         nameField = new TextField();
         numberField = new TextField();
 
-        // Etiketter för textfälten
         nameLabel = new Label("Namn:");
         numberLabel = new Label("Åkarnummer:");
 
-        // Lägg till åkare-knapp
         addButton = new Button("Lägg till åkare");
         addButton.setOnAction(event -> addCompetitor());
 
-        // Starta tävling-knapp
         startCompetitionButton = new Button("Starta tävling");
         startCompetitionButton.setOnAction(event -> startCompetition());
 
-        // Lyssnare för att hantera ändringar i textfälten
         nameField.textProperty().addListener((observable, oldValue, newValue) -> handleNameChanged(newValue));
         numberField.textProperty().addListener((observable, oldValue, newValue) -> handleNumberChanged(newValue));
 
@@ -71,20 +66,16 @@ public class AddCompetitorScene extends SceneWrapper {
     }
 
     private void addCompetitor() {
-        // Hämta namn och åkarnummer från textfälten
         String name = nameField.getText();
         String number = numberField.getText();
 
-        // Lägg till i listan
         competitorListView.getItems().add("Åkare " + name + " - Nummer " + number);
 
-        // Nollställ textfälten
         nameField.clear();
         numberField.clear();
     }
 
     private void startCompetition() {
-        // Implementera logik för att starta tävlingen här
         System.out.println("Tävlingen har startat!");
     }
 }

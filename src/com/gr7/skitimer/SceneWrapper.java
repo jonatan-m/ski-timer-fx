@@ -6,7 +6,7 @@ abstract class SceneWrapper {
 	protected SceneManager manager;
 	protected SceneWrapper next;
 	protected Competition competition;
-	protected CompetitionBuilder builder = new CompetitionBuilder();
+	protected static CompetitionBuilder builder = new CompetitionBuilder();
 
 	public SceneWrapper(SceneManager manager) {
 		this.manager = manager;

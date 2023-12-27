@@ -38,5 +38,10 @@
 		    <artifactId>jaxb-xjc</artifactId>
 		    <version>4.0.4</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-controls</artifactId>
+		    <version>21.0.1</version>
+		  </dependency>
 	  </dependencies>
 </project>

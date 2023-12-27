@@ -1,5 +1,6 @@
 package com.gr7.skitimer;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -9,20 +10,19 @@ import java.util.Map.Entry;
 class PursuitStart extends Competition {
 
 	private CompetitionResult previous = null;
-	
-	public PursuitStart(String fileName) {
+
+	public PursuitStart(File previousResult) {
 		super();
 		this.date = LocalDate.now();
 		this.type = "JAKT_START";
 		
-		previous = FileManager.loadResult(fileName);
-	}
-	
-	public PursuitStart(CompetitionResult result) {
-		super();
-		this.date = LocalDate.now();
-		this.type = "MassStart";
-		previous = result;
+		previous = FileManager.loadResult(previousResult);
+		
+		if(previous != null) {
+			previous.getResults().forEach((k, v) -> {
+				competitors.put(v.getSkierName(), v);
+			});
+		}
 	}
 
 	@Override

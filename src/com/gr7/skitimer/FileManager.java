@@ -27,8 +27,7 @@ class FileManager {
 		}
 	}
 	
-	public static CompetitionResult loadResult(String fileName) {
-		File file = new File("./results/" + fileName);
+	public static CompetitionResult loadResult(File file) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(CompetitionResult.class, Competitor.class);
 			return (CompetitionResult) context.createUnmarshaller().unmarshal(file);

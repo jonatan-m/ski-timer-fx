@@ -5,14 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.TreeMap;
 
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Marshaller;
-
-import java.io.File;
-import java.io.FileOutputStream;
-
-
-
 abstract class Competition {
 	protected TreeMap<String, Competitor> competitors = new TreeMap<>();
 	protected boolean isFinished = false;
@@ -25,6 +17,10 @@ abstract class Competition {
 	
 	public void addCompetitor(String name, String number) {
 		competitors.put(number, new Competitor(name, number));
+	}
+	
+	public void addCompetitors(TreeMap<String, Competitor> competitors) {
+		this.competitors = competitors;
 	}
 	
 	public TreeMap<String, Competitor> getCompetitors(){

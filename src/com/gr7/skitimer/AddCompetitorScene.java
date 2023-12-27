@@ -68,6 +68,8 @@ public class AddCompetitorScene extends SceneWrapper {
     private void addCompetitor() {
         String name = nameField.getText();
         String number = numberField.getText();
+        
+        builder.addCompetitor(number, name);
 
         competitorListView.getItems().add("Åkare " + name + " - Nummer " + number);
 
@@ -76,6 +78,11 @@ public class AddCompetitorScene extends SceneWrapper {
     }
 
     private void startCompetition() {
+    	competition = builder.build();
+    	
+    	competition.getCompetitors().forEach((k,v) -> {
+    		System.out.println(v.getStartTime());
+    	});
         System.out.println("Tävlingen har startat!");
     }
 }

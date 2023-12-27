@@ -89,9 +89,18 @@ class StartScreen extends SceneWrapper{
 		@Override
 		public void handle(ActionEvent event) {
 			switch(competitionType) {
-			case "Masstart" -> next = new MassStartScene(manager);
-			case "Individuell start" -> next = new IntervalStartScene(manager);
-			case "Jaktstart" -> next = new PursuitStartScene(manager);
+			case "Masstart" -> {
+				next = new MassStartScene(manager);
+				builder.setType(CompetitionType.MASS_START);
+			}
+			case "Individuell start" -> {
+				next = new IntervalStartScene(manager);
+				builder.setType(CompetitionType.INTERVAL_START);
+			}
+			case "Jaktstart" -> {
+				next = new PursuitStartScene(manager);
+				builder.setType(CompetitionType.PURSUIT_START);
+			}
  			}
 			
 			LocalTime startTime = LocalTime.parse(hour + ":" + minute + ":" + "00");

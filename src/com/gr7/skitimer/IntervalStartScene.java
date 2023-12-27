@@ -41,6 +41,7 @@ class IntervalStartScene extends SceneWrapper {
         Button continueButton = new Button("Lägg till åkare");
         continueButton.setOnMouseClicked(event -> {
             next = new AddCompetitorScene(manager);
+            builder.setInterval(interval);
             manager.setScene(next);
         });
         

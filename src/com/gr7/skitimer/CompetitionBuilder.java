@@ -30,6 +30,20 @@ class CompetitionBuilder {
 		this.startTime = startTime;
 	}
 	
+	public void setInterval(int interval) {
+		this.interval = switch(interval) {
+        case 15 -> {
+        	yield Interval.FIFTHTEEN;
+        	}
+        case 30 -> {
+        	yield Interval.THIRTY;
+        }
+        default -> {
+        	yield Interval.THIRTY;
+        }
+        };
+	}
+	
 	public void setPreviousResult(File previousResult) {
 		this.previousResult = previousResult;
 	}

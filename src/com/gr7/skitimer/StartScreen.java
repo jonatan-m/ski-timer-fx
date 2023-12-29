@@ -66,6 +66,12 @@ class StartScreen extends SceneWrapper{
         	manager.killStage();
         });
         
+        
+        Button timerButton = new Button("Öppna TimerScene");
+        timerButton.setOnAction(event -> {
+            manager.setTimerScene(); 
+        });
+        
         GridPane pane = new GridPane();
         pane.setVgap(5);
         pane.setHgap(5);
@@ -77,10 +83,12 @@ class StartScreen extends SceneWrapper{
         pane.add(minutes, 1, 0);
         root.add(btn, 0,2);
         root.add(exit, 0, 3);
+        root.add(timerButton, 0, 3);
         
         root.add(pane, 1, 1);
         
         return new Scene(root, 500, 500);
+        
 	}
 	
 	

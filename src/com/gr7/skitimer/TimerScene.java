@@ -32,7 +32,7 @@ public class TimerScene extends SceneWrapper {
 
         timerLabel = new Label("Tid: 00:00:00");
 
-        
+       
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateTimer()));
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
@@ -68,7 +68,7 @@ public class TimerScene extends SceneWrapper {
                 startTime = timer.getTime();
                 startTimes.put(String.valueOf(skiernumber), startTime);
                 resultLabel.setText("Tidtagning påbörjad för åkarenummer " + skiernumber);
-                timeline.play();
+                timeline.play(); 
             } catch (NumberFormatException e) {
                 resultLabel.setText("Ogiltigt åkarenummer.");
             }
@@ -89,7 +89,7 @@ public class TimerScene extends SceneWrapper {
                     }
 
                     resultLabel.setText("Tid för åkarenummer " + skiernumber + ": " + duration.toString());
-                    timeline.stop(); // Stoppa timer-uppdatering
+                    timeline.stop(); 
                 } else {
                     resultLabel.setText("Starttid ej hittad för åkarenummer " + skiernumber);
                 }
@@ -110,14 +110,12 @@ public class TimerScene extends SceneWrapper {
         return LocalTime.ofSecondOfDay(startTime.until(endTime, java.time.temporal.ChronoUnit.SECONDS));
     }
 
-    
     private void updateTimer() {
         LocalTime currentTime = timer.getTime();
         long elapsedSeconds = startTime.until(currentTime, java.time.temporal.ChronoUnit.SECONDS);
         timerLabel.setText("Tid: " + formatTime(elapsedSeconds));
     }
 
-    
     private String formatTime(long elapsedSeconds) {
         long hours = elapsedSeconds / 3600;
         long minutes = (elapsedSeconds % 3600) / 60;

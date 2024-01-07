@@ -9,7 +9,7 @@ import jakarta.xml.bind.Marshaller;
 class FileManager {
 	
 	public static boolean saveResult(CompetitionResult result, String fileName ) {
-		File file = new File("./results/" + fileName);
+		File file = new File("./results/" + fileName + ".xml");
 		try {
 			JAXBContext context = JAXBContext.newInstance(CompetitionResult.class, Competitor.class);
 			Marshaller marshaller = context.createMarshaller();

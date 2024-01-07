@@ -14,8 +14,6 @@ class SceneManager {
 	private StartScreen start = new StartScreen(this);
 	
 	
-	private TimerScene timerScene = new TimerScene(this);
-	
 	public SceneManager(Stage stage) {
 		this.stage = stage;
 		sceneStack.push(start);
@@ -40,15 +38,6 @@ class SceneManager {
 	public File openFileChooser() {
 		final FileChooser fileChooser = new FileChooser();
 		return fileChooser.showOpenDialog(stage);
-	}
-	
-	
-	
-	
-	public void setTimerScene() {
-        sceneStack.push(current);
-        current = timerScene;
-        stage.setScene(timerScene.buildScene());
 	}
 
 }

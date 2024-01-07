@@ -67,11 +67,6 @@ class StartScreen extends SceneWrapper{
         });
         
         
-        Button timerButton = new Button("Öppna TimerScene");
-        timerButton.setOnAction(event -> {
-            manager.setTimerScene(); 
-        });
-        
         GridPane pane = new GridPane();
         pane.setVgap(5);
         pane.setHgap(5);
@@ -83,7 +78,6 @@ class StartScreen extends SceneWrapper{
         pane.add(minutes, 1, 0);
         root.add(btn, 0,2);
         root.add(exit, 0, 3);
-        root.add(timerButton, 0, 3);
         
         root.add(pane, 1, 1);
         
@@ -98,7 +92,7 @@ class StartScreen extends SceneWrapper{
 		public void handle(ActionEvent event) {
 			switch(competitionType) {
 			case "Masstart" -> {
-				next = new MassStartScene(manager);
+				next = new AddCompetitorScene(manager);
 				builder.setType(CompetitionType.MASS_START);
 			}
 			case "Individuell start" -> {

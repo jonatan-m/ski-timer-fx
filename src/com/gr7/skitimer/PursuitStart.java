@@ -20,7 +20,11 @@ class PursuitStart extends Competition {
 		
 		if(previous != null) {
 			previous.getResults().forEach((k, v) -> {
-				competitors.put(v.getSkierName(), v);
+				competitors.put(v.getSkierNumber(), v);
+			});
+			
+			competitors.forEach((k,v) -> {
+				v.setFinishTime(null);
 			});
 		}
 	}
@@ -56,6 +60,22 @@ class PursuitStart extends Competition {
 			fasterEntry = slowerEntry;
 		}
 		return Result.success();
+	}
+	
+	@Override
+	public void finishCompetitor(String number, LocalTime finishTime) {
+		if(isFinished) return;
+		
+		Competitor comp = competitors.get(number);
+		
+		comp.setFinishTime(finishTime);
+		LocalTime timeOverLine = comp.getStartTime().plusNanos(finishTime.toNanoOfDay());
+		result.addResult(timeOverLine, comp);
+		
+		isFinished = true;
+		competitors.forEach((k,v) -> {
+			if(v.getFinishTime() == null) isFinished = false;
+			});
 	}
 
 }

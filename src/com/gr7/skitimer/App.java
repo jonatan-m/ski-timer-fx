@@ -21,7 +21,7 @@ public class App extends Application {
     	sceneManager = new SceneManager(primaryStage);
         primaryStage.setTitle("SkiTimer");
         
-        sceneManager.setPrevious();;
+        sceneManager.setPrevious();
         primaryStage.show();
     }
     

@@ -66,6 +66,7 @@ class StartScreen extends SceneWrapper{
         	manager.killStage();
         });
         
+        
         GridPane pane = new GridPane();
         pane.setVgap(5);
         pane.setHgap(5);
@@ -81,6 +82,7 @@ class StartScreen extends SceneWrapper{
         root.add(pane, 1, 1);
         
         return new Scene(root, 500, 500);
+        
 	}
 	
 	
@@ -90,7 +92,7 @@ class StartScreen extends SceneWrapper{
 		public void handle(ActionEvent event) {
 			switch(competitionType) {
 			case "Masstart" -> {
-				next = new MassStartScene(manager);
+				next = new AddCompetitorScene(manager);
 				builder.setType(CompetitionType.MASS_START);
 			}
 			case "Individuell start" -> {

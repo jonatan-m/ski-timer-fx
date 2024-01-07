@@ -13,6 +13,7 @@ class SceneManager {
 	private SceneWrapper current;
 	private StartScreen start = new StartScreen(this);
 	
+	
 	public SceneManager(Stage stage) {
 		this.stage = stage;
 		sceneStack.push(start);

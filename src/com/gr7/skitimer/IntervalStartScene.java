@@ -46,11 +46,13 @@ class IntervalStartScene extends SceneWrapper {
         });
         
         Label label = new Label("Individuell start");
+        Label ivalLabel = new Label("Start-intervall");
         
         root.add(label, 0, 0);
+        root.add(ivalLabel, 0, 1);
         root.add(intervals, 1, 1);
-        root.add(backButton, 0, 2);
-        root.add(continueButton, 1, 2);
+        root.add(backButton, 0, 3);
+        root.add(continueButton, 0, 2);
         
 		return new Scene(root, 500, 500);
 	}

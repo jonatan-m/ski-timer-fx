@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<competitionResult>
+    <results>
+        <entry>
+            <key>09:37:32.882555400</key>
+            <value>
+                <splitTimes/>
+                <skierName>Fredde</skierName>
+                <skierNumber>01</skierNumber>
+                <startTime>03:00</startTime>
+                <finishTime>09:37:32.882555400</finishTime>
+            </value>
+        </entry>
+        <entry>
+            <key>09:37:36.072694200</key>
+            <value>
+                <splitTimes/>
+                <skierName>Lars</skierName>
+                <skierNumber>02</skierNumber>
+                <startTime>03:00</startTime>
+                <finishTime>09:37:36.072694200</finishTime>
+            </value>
+        </entry>
+    </results>
+</competitionResult>

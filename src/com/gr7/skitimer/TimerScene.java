@@ -40,7 +40,7 @@ public class TimerScene extends SceneWrapper {
         	isFinishTime = true;
         });
 
-        Label inputLabel = new Label("Åkarenummer:");
+        Label inputLabel = new Label("Åkarnummer:");
         ChoiceBox<String> competitors = new ChoiceBox<>();
         
         competition.getCompetitors().forEach((k,v) -> {
@@ -50,19 +50,24 @@ public class TimerScene extends SceneWrapper {
         competitors.setValue(competitors.getItems().get(0));
         
         Button stopButton = new Button("Klocka åkare");
-        Label competitorLabel = new Label();
+        Label timesLabel = new Label("Tider");
         Label resultLabel = new Label();
         Button backButton = new Button("Tillbaka");
         Label allFinished = new Label("Alla åkare har gått i mål");
         Button toResult = new Button("Resultat");
+        ListView<String> times = new ListView<>();
+        
+        GridPane child = new GridPane();
+        
+        child.add(timesLabel, 0, 0);
+        child.add(times, 0, 1, 4, 2);
 
         root.add(inputLabel, 0, 0);
         root.add(competitors, 1, 0);
         root.add(stopButton, 0, 2);
         root.add(intermediateTimeRadio, 0, 1);
         root.add(finishTimeRadio, 1, 1);
-        root.add(competitorLabel, 0, 4);
-        root.add(resultLabel, 1, 4, 2, 1);
+        root.add(child, 0, 3, 4, 2);
         root.add(backButton, 0, 5);
 
         toResult.setOnAction(event -> {
@@ -75,10 +80,13 @@ public class TimerScene extends SceneWrapper {
         		Competitor competitor = competition.getCompetitors().get(competitors.getValue());
         		LocalTime time = Timer.stopTimer(competitor.getStartTime());
         		
-        		competitorLabel.setText(competitor.getSkierNumber() + ":" + competitor.getSkierName());
-        		resultLabel.setText(time.toString());
+        		String timerPos = isFinishTime ? " (Måltid)" : " (Mellantid)";
         		
-        		competition.finishCompetitor(competitors.getValue(), time);
+        		times.getItems().add(competitor.getSkierNumber() + ": " + time + timerPos);
+        		
+        		if(isFinishTime) {
+        			competition.finishCompetitor(competitors.getValue(), time);        			
+        		}
         		
         		if(competition.isFinished) {
         			competition.endCompetition();

@@ -2,23 +2,13 @@
 <competitionResult>
     <results>
         <entry>
-            <key>09:37:32.882555400</key>
+            <key>19:56:22.631517400</key>
             <value>
                 <splitTimes/>
-                <skierName>Fredde</skierName>
+                <skierName>Jonte</skierName>
                 <skierNumber>01</skierNumber>
-                <startTime>03:00</startTime>
-                <finishTime>09:37:32.882555400</finishTime>
-            </value>
-        </entry>
-        <entry>
-            <key>09:37:36.072694200</key>
-            <value>
-                <splitTimes/>
-                <skierName>Lars</skierName>
-                <skierNumber>02</skierNumber>
-                <startTime>03:00</startTime>
-                <finishTime>09:37:36.072694200</finishTime>
+                <startTime>00:00</startTime>
+                <finishTime>19:56:22.631517400</finishTime>
             </value>
         </entry>
     </results>
